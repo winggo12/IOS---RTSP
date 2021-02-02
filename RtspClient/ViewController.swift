@@ -25,12 +25,12 @@ class ViewController: UIViewController {
     var videoSetupOnce = false
     
     var client = NetworkConnectivity(host: "", port: 0)
-    
-    var bboxRect: [Double] = [0, 0, 0, 0]
+    let emptyBboxRect: [CGRect] = [CGRect(x: 0, y: 0, width: 0, height: 0)]
+//    var bboxRect: [Double] = [0, 0, 0, 0]
     
     @IBAction func connectBtn(_ sender: UIButton) {
         if !videoSetupOnce {
-            videoSetup()
+//            videoSetup()
             videoSetupOnce = true
         }
         initClient(host: self.ipInput.text ?? "localhost", port: Int((self.portInput.text! as NSString).intValue))
@@ -41,6 +41,7 @@ class ViewController: UIViewController {
     
     func initClient(host: String, port: Int) {
         self.client.updateAddress(host: host, port: port)
+        self.client.stop()
         self.client.setup()
     }
     
@@ -87,7 +88,7 @@ class ViewController: UIViewController {
             video1.closeAudio()
         }
 //        imageView1.image = video1.currentImage
-        imageView1.image = drawBbox(img: video1.currentImage)
+        imageView1.image = drawBbox(img: video1.currentImage, bboxRect: self.emptyBboxRect)
     }
     
     @objc func update2(timer2: Timer) {
@@ -99,18 +100,19 @@ class ViewController: UIViewController {
         imageView2.image = video2.currentImage
     }
     
-    func drawBbox(img: UIImage) -> UIImage
+    func drawBbox(img: UIImage, bboxRect: [CGRect]) -> UIImage
     {
         let imgSize = img.size
         
         UIGraphicsBeginImageContextWithOptions(imgSize, false, 1.0)
         let context = UIGraphicsGetCurrentContext()
         img.draw(at: CGPoint.zero)
-        let rectangle = CGRect(x: bboxRect[0] * Double(imgSize.width), y: bboxRect[1] * Double(imgSize.height), width: bboxRect[2] * Double(imgSize.width), height: bboxRect[3] * Double(imgSize.height))
         context?.setLineWidth(5.0)
-        UIColor.red.set()
-        context?.addRect(rectangle)
-        context?.strokePath()
+        UIColor.purple.set()
+        for rect in bboxRect {
+            context?.addRect(rect)
+            context?.strokePath()
+        }
         let newImg = UIGraphicsGetImageFromCurrentImageContext() ?? img
         UIGraphicsEndImageContext()
         return newImg
@@ -127,32 +129,29 @@ extension ViewController: NetworkConnectivityDelegate {
         DispatchQueue.main.async {
             self.msgOutput.text = msg
             if msg != "" {
-                let firstChar = msg[msg.index(msg.startIndex, offsetBy: 0)]
-                switch firstChar {
-                case "0":
-                    self.imageView1.layer.borderColor = UIColor(red: 0, green: 1, blue: 0, alpha: 1).cgColor
-                    self.imageView1.layer.borderWidth = 5
-                    self.greenLed.image = UIImage(named: "greenon.png")
-                    self.redLed.image = UIImage(named: "redoff")
-                    self.yellowLed.image = UIImage(named: "yellowoff")
-                    self.bboxRect = [0, 0, 0, 0]
-                case "1":
-                    self.imageView1.layer.borderColor = UIColor(red: 1, green: 1, blue: 0, alpha: 1).cgColor
-                    self.imageView1.layer.borderWidth = 5
-                    self.greenLed.image = UIImage(named: "greenoff")
-                    self.redLed.image = UIImage(named: "redoff")
-                    self.yellowLed.image = UIImage(named: "yellowon")
-                    self.bboxRect = [0, 0, 0, 0]
-                case "2":
+                var boxCnt: Int = 0
+                if (msg != "0") {
+                    let bbox = msg.components(separatedBy: ", ")
+                    var bboxRect: [CGRect] = []
+                    boxCnt = bbox.count / 4
+                    for i in 1...boxCnt {
+                        let box: CGRect = CGRect(x: Int(bbox[4*(i-1)])! * Int(self.imageView1.bounds.width) / 960, y: Int(bbox[1+4*(i-1)])! * Int(self.imageView1.bounds.height) / 540, width: Int(bbox[2+4*(i-1)])! * Int(self.imageView1.bounds.width) / 960, height: Int(bbox[3+4*(i-1)])! * Int(self.imageView1.bounds.height) / 540)
+                        bboxRect.append(box)
+                    }
                     self.imageView1.layer.borderColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1).cgColor
                     self.imageView1.layer.borderWidth = 5
                     self.greenLed.image = UIImage(named: "greenoff")
                     self.redLed.image = UIImage(named: "redon")
                     self.yellowLed.image = UIImage(named: "yellowoff")
-                    let bbox = msg.components(separatedBy: ", ")
-                    self.bboxRect = [Double(bbox[1])!, Double(bbox[2])!, (Double(bbox[3])! - Double(bbox[1])!), (Double(bbox[4])! - Double(bbox[2])!)]
-                default:
-                    break
+                    self.imageView1.image = self.drawBbox(img: UIImage(named: "hkulogo")!, bboxRect: bboxRect)
+                    
+                } else {
+                    self.imageView1.layer.borderColor = UIColor(red: 0, green: 1, blue: 0, alpha: 1).cgColor
+                    self.imageView1.layer.borderWidth = 5
+                    self.greenLed.image = UIImage(named: "greenon.png")
+                    self.redLed.image = UIImage(named: "redoff")
+                    self.yellowLed.image = UIImage(named: "yellowoff")
+                    self.imageView1.image = self.drawBbox(img: UIImage(named: "hkulogo")!, bboxRect: self.emptyBboxRect)
                 }
             }
         }

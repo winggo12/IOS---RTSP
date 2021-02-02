@@ -23,6 +23,10 @@ public class NetworkConnectivity {
     var recvMsg: String = ""
     var nonstop: Bool
     var didRecv: Bool = false
+    let sendMsg: String = "Hi"
+    let complete = NWConnection.SendCompletion.contentProcessed { (error: NWError?) in
+                print("msg sent")
+    }
     
     init(host: String, port: Int){
         self.host = NWEndpoint.Host(host)
@@ -30,12 +34,12 @@ public class NetworkConnectivity {
         self.nonstop = true
     }
 
-    // MARK: - Variables And Properties
+    // MARK: - Private Variables And Properties
     
     private var online: Bool = false
     private var tcpStreamAlive: Bool = false
 
-    // MARK: - Variables And Properties
+    // MARK: - Public Variables And Properties
 
     public weak var networkStatusDelegate: NetworkConnectivityDelegate?
 
@@ -44,9 +48,9 @@ public class NetworkConnectivity {
 
     public func setup() {
 
-        if self.tcpStreamAlive {
-            print("TCP Stream is already setup.")
-        }
+//        if self.tcpStreamAlive {
+//            print("TCP Stream is already setup.")
+//        }
         self.nonstop = true
         setupNWConnection()
     }
@@ -110,45 +114,52 @@ public class NetworkConnectivity {
     }
     
     private func setupReceive(on connection: NWConnection) {
-        connection.receive(minimumIncompleteLength: 1, maximumLength: 65536) { (data, contentContext, isComplete, error) in
-            // Read data off the stream
-            if let data = data, !data.isEmpty {
-                let msg = String(data: data, encoding: .ascii)
-                if let tempMsg = msg {
-                    self.recvMsg = tempMsg
-                    self.didRecv = true
-                } else {
-                    self.recvMsg = "Recv nth"
-                    self.didRecv = false
+        print("setting up")
+//        self.recvMsg = ""
+        connection.send(content: sendMsg.data(using: .utf8), completion: complete)
+//        while (self.recvMsg != "End") {
+//            self.recvMsg = "End"
+            connection.receive(minimumIncompleteLength: 1, maximumLength: 4096) { (data, contentContext, isComplete, error) in
+                if let data = data, !data.isEmpty {
+                    let msg = String(data: data, encoding: .ascii)
+                    if let tempMsg = msg {
+                        self.recvMsg = tempMsg
+                        self.didRecv = true
+//                        connection.send(content: self.sendMsg.data(using: .utf8), completion: self.complete)
+                    } else {
+                        self.recvMsg = "Recv nth"
+                        self.didRecv = false
+                    }
+                    print("connection did receive \(data.count) bytes, message: \(msg ?? "-")")
                 }
-                print("connection did receive \(data.count) bytes, message: \(msg ?? "-")")
-            }
 
-            if isComplete || self.didRecv {
-//                print("setupReceive: isComplete handle end of stream")
-                connection.cancel()
-                self.tcpStreamAlive = false
-                self.didRecv = false
-//                self.setupNWConnection()
+                if isComplete || self.didRecv {
+                    connection.cancel()
+                    self.tcpStreamAlive = false
+                    self.didRecv = false
+    //                self.setupNWConnection()
 
-            } else if let error = error {
-                print("setupReceive: error \(error.localizedDescription)")
-                // TODO: Make sure that if the connection needs to be re-established here, it is.
-            } else {
-                self.setupReceive(on: connection)
+                } else {
+                    if let error = error {
+                    print("setupReceive: error \(error.localizedDescription)")
+                    // TODO: Make sure that if the connection needs to be re-established here, it is.
+                    } else {
+                        self.setupReceive(on: connection)
+                    }
+                }
             }
-        }
+//        } // while
     }
 
-    private func sendEndOfStream(connection: NWConnection) {
-        connection.send(content: nil, contentContext: .defaultStream, isComplete: true, completion: .contentProcessed({ error in
-            print("sendEndOfStream")
-            if let error = error {
-                //self.connectionDidFail(error: error)
-                print("sendEndOfStream: error \(error.localizedDescription)")
-            }
-        }))
-    }
+//    private func sendEndOfStream(connection: NWConnection) {
+//        connection.send(content: nil, contentContext: .defaultStream, isComplete: true, completion: .contentProcessed({ error in
+//            print("sendEndOfStream")
+//            if let error = error {
+//                //self.connectionDidFail(error: error)
+//                print("sendEndOfStream: error \(error.localizedDescription)")
+//            }
+//        }))
+//    }
 
     private func notifyDelegateOnChange(newStatusFlag: Bool, connectivityStatus: String) {
         if newStatusFlag != self.online {
