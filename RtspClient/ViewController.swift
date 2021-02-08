@@ -140,17 +140,17 @@ extension ViewController: NetworkConnectivityDelegate {
                     }
                     self.imageView1.layer.borderColor = UIColor(red: 1, green: 0, blue: 0, alpha: 1).cgColor
                     self.imageView1.layer.borderWidth = 5
-                    self.greenLed.image = UIImage(named: "greenoff")
-                    self.redLed.image = UIImage(named: "redon")
-                    self.yellowLed.image = UIImage(named: "yellowoff")
+//                    self.greenLed.image = UIImage(named: "greenoff")
+//                    self.redLed.image = UIImage(named: "redon")
+//                    self.yellowLed.image = UIImage(named: "yellowoff")
                     self.imageView1.image = self.drawBbox(img: UIImage(named: "hkulogo")!, bboxRect: bboxRect)
                     
                 } else {
                     self.imageView1.layer.borderColor = UIColor(red: 0, green: 1, blue: 0, alpha: 1).cgColor
                     self.imageView1.layer.borderWidth = 5
-                    self.greenLed.image = UIImage(named: "greenon.png")
-                    self.redLed.image = UIImage(named: "redoff")
-                    self.yellowLed.image = UIImage(named: "yellowoff")
+//                    self.greenLed.image = UIImage(named: "greenon.png")
+//                    self.redLed.image = UIImage(named: "redoff")
+//                    self.yellowLed.image = UIImage(named: "yellowoff")
                     self.imageView1.image = self.drawBbox(img: UIImage(named: "hkulogo")!, bboxRect: self.emptyBboxRect)
                 }
             }
