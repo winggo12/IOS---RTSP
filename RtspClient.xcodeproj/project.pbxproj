@@ -15,6 +15,12 @@
 		415C63DC1CECCD69005F81E4 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = 415C63D71CECCD69005F81E4 /* AudioStreamer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		415C63DD1CECCD69005F81E4 /* RTSPPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 415C63D91CECCD69005F81E4 /* RTSPPlayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		415C63DE1CECCD69005F81E4 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 415C63DB1CECCD69005F81E4 /* Utilities.m */; };
+		43438C09260063BC0029BAB1 /* alarm.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 43438C08260063BC0029BAB1 /* alarm.mp3 */; };
+		436341DA25F9B95800ECB9C5 /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436341D925F9B95700ECB9C5 /* Coordinates.swift */; };
+		436C0DB925DE4AF100329384 /* EditServerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DB825DE4AF100329384 /* EditServerController.swift */; };
+		436C0DBD25DF613C00329384 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DBC25DF613C00329384 /* Address.swift */; };
+		436C0DC025DF67E500329384 /* EditCamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DBF25DF67E500329384 /* EditCamViewController.swift */; };
+		436C0DC425DF9D5400329384 /* Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436C0DC325DF9D5400329384 /* Json.swift */; };
 		4372065725C150FB008A0556 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4372065125C1509C008A0556 /* libbz2.tbd */; };
 		4372065925C150FE008A0556 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4372065225C1509C008A0556 /* libiconv.tbd */; };
 		4372065B25C15101008A0556 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4372065325C1509C008A0556 /* libz.tbd */; };
@@ -25,6 +31,9 @@
 		4372066825C1510E008A0556 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4372066125C1510D008A0556 /* libavformat.a */; };
 		4372066925C1510E008A0556 /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4372066225C1510D008A0556 /* libavutil.a */; };
 		4372066A25C1510E008A0556 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4372066325C1510D008A0556 /* libavcodec.a */; };
+		43A9E4FB25DBAA2900DA9365 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9E4FA25DBAA2900DA9365 /* SettingTableViewController.swift */; };
+		43A9E4FE25DBAA5100DA9365 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A9E4FD25DBAA5100DA9365 /* SettingTableViewCell.swift */; };
+		43BD364625DBB58D0051D738 /* MonitorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD364525DBB58D0051D738 /* MonitorViewController.swift */; };
 		43F55889254BD01C004DC30C /* NetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F55888254BD01C004DC30C /* NetworkConnection.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +52,12 @@
 		415C63D91CECCD69005F81E4 /* RTSPPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RTSPPlayer.m; path = RtspClient/PlayerScript/RTSPPlayer.m; sourceTree = SOURCE_ROOT; };
 		415C63DA1CECCD69005F81E4 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utilities.h; path = RtspClient/PlayerScript/Utilities.h; sourceTree = SOURCE_ROOT; };
 		415C63DB1CECCD69005F81E4 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utilities.m; path = RtspClient/PlayerScript/Utilities.m; sourceTree = SOURCE_ROOT; };
+		43438C08260063BC0029BAB1 /* alarm.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alarm.mp3; sourceTree = SOURCE_ROOT; };
+		436341D925F9B95700ECB9C5 /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
+		436C0DB825DE4AF100329384 /* EditServerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditServerController.swift; sourceTree = "<group>"; };
+		436C0DBC25DF613C00329384 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		436C0DBF25DF67E500329384 /* EditCamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCamViewController.swift; sourceTree = "<group>"; };
+		436C0DC325DF9D5400329384 /* Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Json.swift; sourceTree = "<group>"; };
 		4372065125C1509C008A0556 /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		4372065225C1509C008A0556 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		4372065325C1509C008A0556 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -53,6 +68,9 @@
 		4372066125C1510D008A0556 /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = FFMpegiOS/lib/libavformat.a; sourceTree = SOURCE_ROOT; };
 		4372066225C1510D008A0556 /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = FFMpegiOS/lib/libavutil.a; sourceTree = SOURCE_ROOT; };
 		4372066325C1510D008A0556 /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = FFMpegiOS/lib/libavcodec.a; sourceTree = SOURCE_ROOT; };
+		43A9E4FA25DBAA2900DA9365 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		43A9E4FD25DBAA5100DA9365 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		43BD364525DBB58D0051D738 /* MonitorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitorViewController.swift; sourceTree = "<group>"; };
 		43F55888254BD01C004DC30C /* NetworkConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,10 +115,12 @@
 		415C63991CECC824005F81E4 /* RtspClient */ = {
 			isa = PBXGroup;
 			children = (
+				43438C08260063BC0029BAB1 /* alarm.mp3 */,
+				436C0DBB25DF612400329384 /* Model */,
+				436C0DB725DE491800329384 /* Function */,
+				436C0DB625DE48F200329384 /* Controller */,
 				4372066D25C15193008A0556 /* PlayerScript */,
-				43F55888254BD01C004DC30C /* NetworkConnection.swift */,
 				415C639A1CECC824005F81E4 /* AppDelegate.swift */,
-				415C639C1CECC824005F81E4 /* ViewController.swift */,
 				415C639E1CECC824005F81E4 /* Main.storyboard */,
 				415C63A11CECC824005F81E4 /* Assets.xcassets */,
 				415C63A31CECC824005F81E4 /* LaunchScreen.storyboard */,
@@ -108,6 +128,37 @@
 				415C63D51CECCD69005F81E4 /* RtspClient-Bridging-Header.h */,
 			);
 			path = RtspClient;
+			sourceTree = "<group>";
+		};
+		436C0DB625DE48F200329384 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				415C639C1CECC824005F81E4 /* ViewController.swift */,
+				43A9E4FA25DBAA2900DA9365 /* SettingTableViewController.swift */,
+				43A9E4FD25DBAA5100DA9365 /* SettingTableViewCell.swift */,
+				43BD364525DBB58D0051D738 /* MonitorViewController.swift */,
+				436C0DB825DE4AF100329384 /* EditServerController.swift */,
+				436C0DBF25DF67E500329384 /* EditCamViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		436C0DB725DE491800329384 /* Function */ = {
+			isa = PBXGroup;
+			children = (
+				43F55888254BD01C004DC30C /* NetworkConnection.swift */,
+				436C0DC325DF9D5400329384 /* Json.swift */,
+				436341D925F9B95700ECB9C5 /* Coordinates.swift */,
+			);
+			path = Function;
+			sourceTree = "<group>";
+		};
+		436C0DBB25DF612400329384 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				436C0DBC25DF613C00329384 /* Address.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		4372065025C15092008A0556 /* Library */ = {
@@ -172,7 +223,8 @@
 				TargetAttributes = {
 					415C63961CECC824005F81E4 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 75J7TVGUG8;
+						DevelopmentTeam = JUDFW2WMA7;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -200,6 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43438C09260063BC0029BAB1 /* alarm.mp3 in Resources */,
 				415C63A51CECC824005F81E4 /* LaunchScreen.storyboard in Resources */,
 				415C63A21CECC824005F81E4 /* Assets.xcassets in Resources */,
 				415C63A01CECC824005F81E4 /* Main.storyboard in Resources */,
@@ -213,11 +266,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				436C0DC025DF67E500329384 /* EditCamViewController.swift in Sources */,
+				43A9E4FB25DBAA2900DA9365 /* SettingTableViewController.swift in Sources */,
 				415C639D1CECC824005F81E4 /* ViewController.swift in Sources */,
 				415C63DD1CECCD69005F81E4 /* RTSPPlayer.m in Sources */,
 				43F55889254BD01C004DC30C /* NetworkConnection.swift in Sources */,
 				415C639B1CECC824005F81E4 /* AppDelegate.swift in Sources */,
+				436C0DB925DE4AF100329384 /* EditServerController.swift in Sources */,
 				415C63DC1CECCD69005F81E4 /* AudioStreamer.m in Sources */,
+				43A9E4FE25DBAA5100DA9365 /* SettingTableViewCell.swift in Sources */,
+				436341DA25F9B95800ECB9C5 /* Coordinates.swift in Sources */,
+				43BD364625DBB58D0051D738 /* MonitorViewController.swift in Sources */,
+				436C0DBD25DF613C00329384 /* Address.swift in Sources */,
+				436C0DC425DF9D5400329384 /* Json.swift in Sources */,
 				415C63DE1CECCD69005F81E4 /* Utilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,17 +412,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 75J7TVGUG8;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JUDFW2WMA7;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/FFMpegiOS/include/**";
 				INFOPLIST_FILE = RtspClient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFMpegiOS/lib",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.RtspClient12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OBJC_BRIDGING_HEADER = "RtspClient/RtspClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -374,17 +442,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 75J7TVGUG8;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JUDFW2WMA7;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/FFMpegiOS/include/**";
 				INFOPLIST_FILE = RtspClient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FFMpegiOS/lib",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.RtspClient12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OBJC_BRIDGING_HEADER = "RtspClient/RtspClient-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

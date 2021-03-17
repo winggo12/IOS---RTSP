@@ -23,9 +23,10 @@ public class NetworkConnectivity {
     var recvMsg: String = ""
     var nonstop: Bool
     var didRecv: Bool = false
-    let sendMsg: String = "Hi"
+//    let sendMsg: String = "Hi from iOS"
+    var sendMsg: String = "1"
     let complete = NWConnection.SendCompletion.contentProcessed { (error: NWError?) in
-                print("msg sent")
+//                print("msg sent")
     }
     
     init(host: String, port: Int){
@@ -64,6 +65,7 @@ public class NetworkConnectivity {
         self.host = NWEndpoint.Host(host)
         self.port = NWEndpoint.Port(rawValue: UInt16(port))!
         print(host)
+        print(port)
     }
     
     //
@@ -100,9 +102,11 @@ public class NetworkConnectivity {
             let errorMessage = "Error: \(error.localizedDescription)"
             self.notifyDelegateOnChange(newStatusFlag: false, connectivityStatus: errorMessage)
             self.tcpStreamAlive = false
+            self.setupNWConnection()
         case .cancelled:
             self.notifyDelegateOnChange(newStatusFlag: false, connectivityStatus: "cancelled")
             self.tcpStreamAlive = false
+            
             self.setupNWConnection()
             break
         case .preparing:
@@ -114,23 +118,20 @@ public class NetworkConnectivity {
     }
     
     private func setupReceive(on connection: NWConnection) {
-        print("setting up")
-//        self.recvMsg = ""
         connection.send(content: sendMsg.data(using: .utf8), completion: complete)
-//        while (self.recvMsg != "End") {
-//            self.recvMsg = "End"
-            connection.receive(minimumIncompleteLength: 1, maximumLength: 4096) { (data, contentContext, isComplete, error) in
+        sendMsg = "1"
+            connection.receive(minimumIncompleteLength: 1, maximumLength: 8192) { (data, contentContext, isComplete, error) in
                 if let data = data, !data.isEmpty {
                     let msg = String(data: data, encoding: .ascii)
                     if let tempMsg = msg {
                         self.recvMsg = tempMsg
                         self.didRecv = true
-//                        connection.send(content: self.sendMsg.data(using: .utf8), completion: self.complete)
                     } else {
                         self.recvMsg = "Recv nth"
                         self.didRecv = false
                     }
-                    print("connection did receive \(data.count) bytes, message: \(msg ?? "-")")
+//                    print("connection did receive \(data.count) bytes, message: \(msg ?? "-")")
+//                    print(msg ?? "No msg received")
                 }
 
                 if isComplete || self.didRecv {
@@ -150,16 +151,10 @@ public class NetworkConnectivity {
             }
 //        } // while
     }
-
-//    private func sendEndOfStream(connection: NWConnection) {
-//        connection.send(content: nil, contentContext: .defaultStream, isComplete: true, completion: .contentProcessed({ error in
-//            print("sendEndOfStream")
-//            if let error = error {
-//                //self.connectionDidFail(error: error)
-//                print("sendEndOfStream: error \(error.localizedDescription)")
-//            }
-//        }))
-//    }
+    
+    public func sendReset() {
+        sendMsg = "0"
+    }
 
     private func notifyDelegateOnChange(newStatusFlag: Bool, connectivityStatus: String) {
         if newStatusFlag != self.online {
