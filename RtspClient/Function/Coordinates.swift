@@ -32,19 +32,31 @@ public struct Coords {
         let sigs = msg.components(separatedBy: "{")
         for i in 1..<sigs.count {
             // "#@yyyymmddhhmmss:x,y,bx1,by1,bx2,by2"
-            let camNo = Int(sigs[i].components(separatedBy: "@")[0]) ?? 0
-            let trimSig = sigs[i].trimmingCharacters(in: self.customCharSet)
-//            let trimSig2 = trimSig.trimmingCharacters(in: .whitespaces)
+            let trimSig = sigs[i].components(separatedBy: "}")
+//            let camNo = Int(sigs[i].components(separatedBy: "@")[0]) ?? 0
+            let camNo = Int(trimSig[0].components(separatedBy: "@")[0]) ?? 0
+            
+//            let trimSig = sigs[i].trimmingCharacters(in: .whitespaces)
+//            let trimSig2 = trimSig.trimmingCharacters(in: self.customCharSet)
+            
 //            print(trimSig2)
             // ["#@yyyymmddhhmmss", "x,y,bx1,by1,bx2,by2"]
-            let se1 = trimSig.components(separatedBy: ":")
+//            let se1 = trimSig2.components(separatedBy: ":")
+            let se1 = trimSig[0].components(separatedBy: ":")
             // "x,y,bx1,by1,bx2,by2"
             // l,bx1,by1,bx2,by2
-            let coords = se1[1].components(separatedBy: ",")
-            let rect = CGRect(x: Double(coords[1].trimmingCharacters(in: .whitespaces))!*x, y: Double(coords[2].trimmingCharacters(in: .whitespaces))!*y, width: (Double(coords[3].trimmingCharacters(in: .whitespaces))!-Double(coords[1].trimmingCharacters(in: .whitespaces))!)*x, height: (Double(coords[4].trimmingCharacters(in: .whitespaces))! - Double(coords[2].trimmingCharacters(in: .whitespaces))!)*y)
-            let loc = Int(coords[0]) ?? 0
+            let trimcoords = se1[1].components(separatedBy: ",")
+//            var trimcoords : [String] = [String]()
+//            for coord in coords {
+//                trimcoords.append(coord.trimmingCharacters(in: self.customCharSet))
+//            }
+            let rect = CGRect(x: Double(trimcoords[1].trimmingCharacters(in: .whitespaces))!*x, y: Double(trimcoords[2].trimmingCharacters(in: .whitespaces))!*y, width: (Double(trimcoords[3].trimmingCharacters(in: .whitespaces))!-Double(trimcoords[1].trimmingCharacters(in: .whitespaces))!)*x, height: (Double(trimcoords[4].trimmingCharacters(in: .whitespaces))! - Double(trimcoords[2].trimmingCharacters(in: .whitespaces))!)*y)
+            
+            var loc = Int(trimcoords[0]) ?? 0
 //            print(self.camDict[camNo]![loc]!)
-            self.camLoc.append(self.camDict[camNo]![loc]!)
+            if (loc > 0) {
+                self.camLoc.append(self.camDict[camNo]![loc]!)
+            }
             self.camBbox[camNo-1].append(rect)
 //            self.plane[camNo-1] = Int(coords[0]) ?? 0
         }

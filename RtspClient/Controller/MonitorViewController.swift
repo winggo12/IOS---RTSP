@@ -262,14 +262,15 @@ extension MonitorViewController: NetworkConnectivityDelegate {
     func networkStatusChanged(online: Bool, connectivityStatus: String, msg: String) {
         DispatchQueue.main.async {
             if (msg != "") {
-//                print(msg)
-                if (msg != "{}" && msg.count <= 200) {
+                print("msg.count: ", msg.count)
+                print(msg)
+                if (msg != "{}" && msg.count <= 8000) {
                     self.coords.extractCoords(msg: msg, x: Double(self.cam1.bounds.width), y: Double(self.cam1.bounds.height))
                     self.drawPlane(locs: self.coords.camLoc)
                     self.playAlarm()
                     self.normalCnt = 0
                 } else {
-                    print("no drowning")
+//                    print("no drowning")
                     self.normalCnt += 1
                     if (self.normalCnt == self.normalStd) {
                         self.coords.camBbox = [[],[],[],[]]

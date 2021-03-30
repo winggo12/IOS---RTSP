@@ -223,7 +223,7 @@
 				TargetAttributes = {
 					415C63961CECC824005F81E4 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = JUDFW2WMA7;
+						DevelopmentTeam = 75J7TVGUG8;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -414,7 +414,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JUDFW2WMA7;
+				DEVELOPMENT_TEAM = 75J7TVGUG8;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/FFMpegiOS/include/**";
 				INFOPLIST_FILE = RtspClient/Info.plist;
@@ -425,7 +425,7 @@
 					"$(PROJECT_DIR)/FFMpegiOS/lib",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.RtspClient12;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.RtspClient12n;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
@@ -444,7 +444,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JUDFW2WMA7;
+				DEVELOPMENT_TEAM = 75J7TVGUG8;
 				ENABLE_BITCODE = NO;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/FFMpegiOS/include/**";
 				INFOPLIST_FILE = RtspClient/Info.plist;
@@ -455,7 +455,7 @@
 					"$(PROJECT_DIR)/FFMpegiOS/lib",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.RtspClient12;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.RtspClient12n;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
