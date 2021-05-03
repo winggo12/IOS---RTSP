@@ -124,7 +124,7 @@ public class NetworkConnectivity {
                 if let data = data, !data.isEmpty {
                     let msg = String(data: data, encoding: .ascii)
                     if let tempMsg = msg {
-                        print("original msg",msg)
+//                        print("original msg",msg)
                         self.recvMsg = tempMsg
                         self.didRecv = true
                     } else {

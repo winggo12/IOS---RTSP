@@ -9,7 +9,7 @@
 import Foundation
 
 public struct Json {
-    static var addressData = address(server_ip: "", server_port: 0, cam_urls: ["rtsp://192.168.50.3:554/user=admin&password=Hkumb155&channel=1&stream=0.rsp", "rtsp://192.168.50.4:554/user=admin&password=Hkumb155&channel=1&stream=0.rsp", "", ""])
+    static var addressData = address(server_ip: "0.0.0.0", server_port: 0, cam_urls: ["rtsp://192.168.50.3:554/user=admin&password=Hkumb155&channel=1&stream=0.rsp", "rtsp://192.168.50.4:554/user=admin&password=Hkumb155&channel=1&stream=0.rsp", "", ""])
     
     static let docPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     
