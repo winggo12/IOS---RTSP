@@ -12,6 +12,13 @@
     AVFrame *pFrame;
     AVPacket packet;
 	AVPicture picture;
+    int numOfPacket;
+    float totalPacketSize;
+    float totalTime;
+    float bandwidth;
+    CFAbsoluteTime streamReceptionStartTime;
+    CFAbsoluteTime lastPackageTime;
+    
 	int videoStream;
     int audioStream;
 	struct SwsContext *img_convert_ctx;

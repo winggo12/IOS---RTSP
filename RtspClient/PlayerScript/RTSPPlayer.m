@@ -26,6 +26,8 @@
 
 @synthesize outputWidth, outputHeight;
 
+
+
 - (void)setOutputWidth:(int)newValue
 {
 	if (outputWidth != newValue) {
@@ -86,7 +88,7 @@
     if (usesTcp) 
         av_dict_set(&opts, "rtsp_transport", "tcp", 0);
 
-    
+    CFAbsoluteTime connectionStartTime = CFAbsoluteTimeGetCurrent();
     if (avformat_open_input(&pFormatCtx, [moviePath UTF8String], NULL, &opts) !=0 ) {
         av_log(NULL, AV_LOG_ERROR, "Couldn't open file\n");
         goto initError;
@@ -101,6 +103,13 @@
     // Find the first video stream
     videoStream=-1;
     audioStream=-1;
+    
+    //Init var for calculating packet-related
+    //parameter
+    numOfPacket=0;
+    totalPacketSize = 0.0f;
+    totalTime = 0.0f;
+    lastPackageTime = CFAbsoluteTimeGetCurrent();
 
     for (int i=0; i<pFormatCtx->nb_streams; i++) {
         if (pFormatCtx->streams[i]->codec->codec_type==AVMEDIA_TYPE_VIDEO) {
@@ -113,6 +122,11 @@
             NSLog(@"found audio stream");
         }
     }
+    
+    CFAbsoluteTime connectionEndTime = CFAbsoluteTimeGetCurrent();
+    streamReceptionStartTime = connectionEndTime;
+    
+    NSLog(@"Connection Established Time (ms): %f", 1000.f*(connectionEndTime-connectionStartTime));
     
     if (videoStream==-1 && audioStream==-1) {
         goto initError;
@@ -144,7 +158,8 @@
 			
 	outputWidth = pCodecCtx->width;
 	self.outputHeight = pCodecCtx->height;
-			
+    
+    
 	return self;
 	
 initError:
@@ -220,7 +235,19 @@ initError:
 	// AVPacket packet;
     int frameFinished=0;
 
+    if(numOfPacket==0){
+        
+        lastPackageTime = CFAbsoluteTimeGetCurrent();
+        float streamReceptionTime = 1000.f*(CFAbsoluteTimeGetCurrent() - streamReceptionStartTime);
+        NSLog(@"streamReceptionTime (ms): %f ",streamReceptionTime);
+        
+    }
+    
     while (!frameFinished && av_read_frame(pFormatCtx, &packet) >=0 ) {
+        numOfPacket++;
+        NSLog(@"Packet %d, Size (bytes): %d, Presentation TS (s): %f s",numOfPacket, packet.size, packet.pts/100000.0f);
+        totalPacketSize += (float)packet.size;
+        
         // Is this a packet from the video stream?
         if(packet.stream_index==videoStream) {
             // Decode video frame
@@ -245,7 +272,22 @@ initError:
                 [_audioController enqueueBuffer:emptyAudioBuffer];
             }
         }
+    
+    
 	}
+    
+
+        CFAbsoluteTime currentPackageTime = CFAbsoluteTimeGetCurrent();
+        totalTime += ( currentPackageTime - lastPackageTime );
+        //Calculate bandwidth every 5s
+        if(totalTime > 3){
+            float totalPacketSizeInBit = (totalPacketSize)*8.f/1000000.f;
+            
+            NSLog(@"Total Package Size : %f in kb" , totalPacketSizeInBit);
+            NSLog(@"Total Time : %f in s" , totalTime);
+            totalPacketSize, totalTime = 0.0f;
+        }
+        lastPackageTime = currentPackageTime;
     
 	return frameFinished!=0;
 }

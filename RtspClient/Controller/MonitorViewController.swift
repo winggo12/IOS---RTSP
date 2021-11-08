@@ -162,15 +162,23 @@ class MonitorViewController: UIViewController {
     
     func videoSetup() {
         DispatchQueue.global().async {
-            print("Connecting camera...")
+            var stopwatch = StopWatch()
+            print("Connecting camera ...")
+            
+            stopwatch.startCount()
             self.video1 = RTSPPlayer(video: Json.addressData.cam_urls[0], usesTcp: true)
+
+            
             if self.video1 != nil {
+                print(stopwatch.intermediateResult())
                 DispatchQueue.main.async {
                     self.video1.outputWidth = Int32(self.cam1.bounds.width)
                     self.video1.outputHeight = Int32(self.cam1.bounds.height)
                     self.video1.seekTime(0.0)
                     let timer1 = Timer.scheduledTimer(timeInterval: 1.0/30, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
                       timer1.fire()
+                    stopwatch.endCount()
+                    print(stopwatch.result())
                 }
             }
         }
